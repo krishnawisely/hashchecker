@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row justify-content-center align-items-center text-center">
+        <div class="col-lg-6 col-sm-6">
+            <p class="display-6">Hash checker</p>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-lg-6 col-sm-6">
+            <mat-form-field appearance="fill" class="p-3">
+                <mat-label>Select env</mat-label>
+                <mat-select [(ngModel)]="env">
+                    <mat-option *ngFor="let env of envs" [value]="env">
+                        {{env | uppercase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="p-3">
+                <mat-label>Select compare to env</mat-label>
+                <mat-select [(ngModel)]="compareToEnv">
+                    <mat-option *ngFor="let env of envs" [value]="env">
+                        {{env | uppercase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-lg-6 col-sm-6">
+            <button mat-raised-button color="warn" (click)="getResult()">Hash Check</button>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-lg-6 col-sm-6">
+            <div *ngIf="finalResult" class="row justify-content-center align-items-center text-center">
+                <button *ngFor="let result of finalResult" mat-raised-button color="warn" class="col-lg-4 col-sm-3 p-3 mat-btn-width">
+                    {{result.serviceName | uppercase}}
+                    <div class="w-100"></div>
+                    <span class="material-icons" *ngIf="result.isMatched">
+                        check_circle
+                        </span>  
+                    <span class="material-icons" *ngIf="!result.isMatched">
+                        <span class="material-icons">
+                            highlight_off
+                            </span>
+                        </span>            
+                </button>
+            </div>
+
+            <!-- <button type="button" class="btn btn-primary position-relative rounded-pill" *ngFor="let result of finalResult">
+                {{result.serviceName | uppercase}}
+                <span class="position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle" [ngClass]="result.isMatched ? 'bg-success' : 'bg-danger'">
+                <span class="visually-hidden">New alerts</span>
+                </span>
+            </button> -->
+        </div>
+    </div>
+</div>
